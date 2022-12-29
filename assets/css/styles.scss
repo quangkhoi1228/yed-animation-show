@@ -47,10 +47,10 @@ $acl-position-top: 20vh;
     opacity: 1;
   }
   100% {
-    transform: scale(0);
+    transform: scale(0.1);
     left: 0;
     opacity: 0;
-    top: 0;
+    top: -15vh;
   }
 }
 
@@ -61,12 +61,12 @@ $acl-position-top: 20vh;
   position: fixed;
   left: 1rem;
   top: 1rem;
-  animation: fadeIn 2s linear $acl-and-mft-animation-duration/3 forwards;
+  animation: fadeIn 2s linear $acl-and-mft-animation-duration/2 forwards;
   opacity: 0;
   .logo {
     text-align: center;
     img {
-      max-width: 10rem;
+      max-width: 8rem;
     }
 
     &.mft-logo-container {
