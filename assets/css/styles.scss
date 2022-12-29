@@ -1,3 +1,6 @@
+:root {
+  --primary: #217345;
+}
 html {
   font-size: 16px;
 }
@@ -116,4 +119,101 @@ $acl-position-top: 20vh;
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 10;
+}
+
+.countdown-container {
+  background: var(--primary);
+  font-family: "Arial", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+  opacity: 0;
+  &.is-active {
+    animation: countdown 2s linear forwards;
+  }
+
+  .star {
+    position: absolute;
+    will-change: transform;
+    width: 1.25rem;
+    height: 1.25rem;
+    fill: hsla(var(--hue, 45), 90%, 70%, var(--alpha, 0));
+    z-index: 10;
+    /* higher than button before click */
+  }
+
+  .icon {
+    --alpha: 1;
+  }
+
+  button {
+    position: relative;
+    font-size: 1.3rem;
+    font-family: monospace, sans-serif;
+    max-width: 25ch;
+    width: auto;
+    text-align: left;
+    padding: 1rem 1.75rem;
+    border-radius: 0.3rem;
+    background: inherit;
+    border: none;
+    /* background: rgb(29, 36, 58);
+  color: rgba(255, 255, 255, .95); */
+    z-index: 5;
+  }
+
+  button:focus {
+    outline: none;
+  }
+
+  button:hover {
+    cursor: pointer;
+    /*     background: rgb(24, 30, 48); */
+  }
+
+  .icon {
+    position: relative;
+    right: 18px;
+    top: -2px;
+    margin-left: 5.5rem;
+  }
+
+  .box-time {
+    text-align: center;
+    font-family: "Kalam", cursive;
+  }
+
+  .box-time a {
+    display: none;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+    font-size: 100px;
+    line-height: 0.5;
+    color: #fff;
+    margin: 0 auto;
+    text-align: center;
+    font-weight: 700;
+    font: italic bold 100px Georgia, Serif;
+    text-shadow: -4px 3px 0 var(--primary), -14px 7px 0 #0a0e27;
+  }
+
+  a:visited {
+    text-decoration: none;
+    color: white;
+  }
+}
+
+@keyframes countdown {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

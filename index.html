@@ -14,6 +14,7 @@
     rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/styles.css">
   <script src="/assets/js/main.js"></script>
+
 </head>
 
 <body>
@@ -32,8 +33,8 @@
             srcset="/assets/images/logo_green.png">
         </div>
         <div class="logo mft-logo-container">
-          <img src="/assets/images/mft_white.webp" alt="mft-logo"
-            srcset="/assets/images/mft_white.webp">
+          <img src="/assets/images/mft_white.png" alt="mft-logo"
+            srcset="/assets/images/mft_white.png">
         </div>
 
       </div>
@@ -41,13 +42,23 @@
     <section class="effect-typing-text-container">
 
       <h1>
+        <!-- <a href="" class="typewrite" data-period="1000"
+          data-type='[ "Một năm qua các bạn đã nỗ lực làm việc một cách chăm chỉ", "Các bạn đã rất vất vả để vượt qua mọi khó khăn, thử thách", "Nhưng ắt hẳn cũng không thiếu những niềm vui khi đạt được thành tựu", "Cùng nhìn lại một năm vừa qua nhé!!!" ]'> -->
+
         <a href="" class="typewrite" data-period="1000"
-          data-type='[ "Một năm qua các bạn đã nỗ lực làm việc một cách chăm chỉ", "Các bạn đã rất vất vả để vượt qua mọi khó khăn, thử thách", "Nhưng ắt hẳn cũng không thiếu những niềm vui khi đạt được thành tựu", "Cùng nhìn lại một năm vừa qua nhé!!!" ]'>
+          data-type='[ "Cùng nhìn lại một năm vừa qua nhé!!!" ]'>
           <span class="wrap"></span>
         </a>
       </h1>
     </section>
-    <canvas id="canvasBackgroundFirework">This browser does not support canvas.</canvas>
+    <canvas id="canvasBackgroundFirework">This browser does not support
+      canvas.</canvas>
+
+    <iframe id="countdownIframe" src="" frameborder="0" style="
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+"></iframe>
   </main>
   <script>
     main.init();

@@ -1,3 +1,7 @@
+:root {
+  --primary: #217345;
+}
+
 html {
   font-size: 16px;
 }
@@ -168,5 +172,119 @@ body {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 10;
+}
+
+.countdown-container {
+  background: var(--primary);
+  font-family: "Arial", sans-serif;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.countdown-container.is-active {
+  -webkit-animation: countdown 2s linear forwards;
+          animation: countdown 2s linear forwards;
+}
+
+.countdown-container .star {
+  position: absolute;
+  will-change: transform;
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: hsla(var(--hue, 45), 90%, 70%, var(--alpha, 0));
+  z-index: 10;
+  /* higher than button before click */
+}
+
+.countdown-container .icon {
+  --alpha: 1;
+}
+
+.countdown-container button {
+  position: relative;
+  font-size: 1.3rem;
+  font-family: monospace, sans-serif;
+  max-width: 25ch;
+  width: auto;
+  text-align: left;
+  padding: 1rem 1.75rem;
+  border-radius: 0.3rem;
+  background: inherit;
+  border: none;
+  /* background: rgb(29, 36, 58);
+  color: rgba(255, 255, 255, .95); */
+  z-index: 5;
+}
+
+.countdown-container button:focus {
+  outline: none;
+}
+
+.countdown-container button:hover {
+  cursor: pointer;
+  /*     background: rgb(24, 30, 48); */
+}
+
+.countdown-container .icon {
+  position: relative;
+  right: 18px;
+  top: -2px;
+  margin-left: 5.5rem;
+}
+
+.countdown-container .box-time {
+  text-align: center;
+  font-family: "Kalam", cursive;
+}
+
+.countdown-container .box-time a {
+  display: none;
+}
+
+.countdown-container a {
+  text-decoration: none;
+  color: inherit;
+  font-size: 100px;
+  line-height: 0.5;
+  color: #fff;
+  margin: 0 auto;
+  text-align: center;
+  font-weight: 700;
+  font: italic bold 100px Georgia, Serif;
+  text-shadow: -4px 3px 0 var(--primary), -14px 7px 0 #0a0e27;
+}
+
+.countdown-container a:visited {
+  text-decoration: none;
+  color: white;
+}
+
+@-webkit-keyframes countdown {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes countdown {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 /*# sourceMappingURL=styles.css.map */
