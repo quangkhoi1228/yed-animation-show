@@ -1,0 +1,33 @@
+html {
+  font-size: 16px;
+}
+
+body {
+  background-color: black;
+  padding: 0;
+  margin: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25rem 3rem;
+  background: transparent;
+  .logo {
+    img {
+      max-width: 10rem;
+    }
+
+    &.mft-logo-container {
+      img {
+        filter: invert(1);
+      }
+    }
+    &.acl-logo-container{
+      img{
+        margin: -1.5rem 0;
+      }
+    }
+  }
+}
