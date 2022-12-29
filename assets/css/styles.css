@@ -163,4 +163,10 @@ body {
   text-decoration: none;
   color: white;
 }
+
+#canvasBackgroundFirework {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
 /*# sourceMappingURL=styles.css.map */
