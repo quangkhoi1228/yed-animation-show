@@ -8,30 +8,134 @@ body {
   margin: 0;
 }
 
-.header {
+.aclandmft-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 0.25rem 3rem;
-  background: transparent;
+  margin: auto;
+  width: 100vw;
+  height: 100vh;
 }
 
-.header .logo img {
+.aclandmft-container svg {
+  position: absolute;
+  left: 40vw;
+  top: 20vh;
+  stroke-dasharray: 1977;
+  -webkit-animation: 10s fillSvg linear, 3s scaleAndMoveLeft linear 2.5s forwards;
+          animation: 10s fillSvg linear, 3s scaleAndMoveLeft linear 2.5s forwards;
+}
+
+@-webkit-keyframes fillSvg {
+  0% {
+    stroke-dashoffset: 1977;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fillSvg {
+  0% {
+    stroke-dashoffset: 1977;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@-webkit-keyframes scaleAndMoveLeft {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    left: 40vw;
+    top: 20vh;
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+    left: 0;
+    opacity: 0;
+    top: 0;
+  }
+}
+
+@keyframes scaleAndMoveLeft {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    left: 40vw;
+    top: 20vh;
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+    left: 0;
+    opacity: 0;
+    top: 0;
+  }
+}
+
+.logo-left {
+  display: block;
+  padding: 0.25rem 1rem;
+  background: transparent;
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  -webkit-animation: fadeIn 2s linear 3.33333s forwards;
+          animation: fadeIn 2s linear 3.33333s forwards;
+  opacity: 0;
+}
+
+.logo-left .logo {
+  text-align: center;
+}
+
+.logo-left .logo img {
   max-width: 10rem;
 }
 
-.header .logo.mft-logo-container img {
+.logo-left .logo.mft-logo-container img {
   -webkit-filter: invert(1);
           filter: invert(1);
 }
 
-.header .logo.acl-logo-container img {
-  margin: -1.5rem 0;
+.logo-left .logo.acl-logo-container img {
+  margin: 0 1rem;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    -webkit-transform: translate3d(2rem, 2rem, 0);
+            transform: translate3d(2rem, 2rem, 0);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    -webkit-transform: translate3d(2rem, 2rem, 0);
+            transform: translate3d(2rem, 2rem, 0);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
 }
 /*# sourceMappingURL=styles.css.map */

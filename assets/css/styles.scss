@@ -8,13 +8,63 @@ body {
   margin: 0;
 }
 
-.header {
+$acl-and-mft-animation-duration: 10s;
+$acl-and-mft-length: 1977;
+$acl-position-left: 40vw;
+$acl-position-top: 20vh;
+.aclandmft-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 0.25rem 3rem;
+  margin: auto;
+  width: 100vw;
+  height: 100vh;
+
+  svg {
+    position: absolute;
+    left: $acl-position-left;
+    top: $acl-position-top;
+    stroke-dasharray: $acl-and-mft-length;
+    animation: $acl-and-mft-animation-duration fillSvg linear,
+      3s scaleAndMoveLeft linear $acl-and-mft-animation-duration/4 forwards;
+  }
+}
+
+@keyframes fillSvg {
+  0% {
+    stroke-dashoffset: $acl-and-mft-length;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes scaleAndMoveLeft {
+  0% {
+    transform: scale(1);
+    left: $acl-position-left;
+    top: $acl-position-top;
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    left: 0;
+    opacity: 0;
+    top: 0;
+  }
+}
+
+.logo-left {
+  display: block;
+  padding: 0.25rem 1rem;
   background: transparent;
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  animation: fadeIn 2s linear $acl-and-mft-animation-duration/3 forwards;
+  opacity: 0;
   .logo {
+    text-align: center;
     img {
       max-width: 10rem;
     }
@@ -24,10 +74,21 @@ body {
         filter: invert(1);
       }
     }
-    &.acl-logo-container{
-      img{
-        margin: -1.5rem 0;
+    &.acl-logo-container {
+      img {
+        margin: 0 1rem;
       }
     }
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    transform: translate3d(2rem, 2rem,0);
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(0,0,0);
+    opacity: 1;
   }
 }
