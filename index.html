@@ -54,11 +54,17 @@
     <canvas id="canvasBackgroundFirework">This browser does not support
       canvas.</canvas>
 
-    <iframe id="countdownIframe" src="" frameborder="0" style="
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-"></iframe>
+    <iframe id="countdownIframe" src="" frameborder="0"
+      class="iframe-fullscreen"></iframe>
+    <section class="awards-video-container">
+      <video id="awardsVideo" controls class="iframe-fullscreen">
+        <source src="/assets/files/awards-video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="awards-control-container">
+
+      </div>
+    </section>
   </main>
   <script>
     main.init();

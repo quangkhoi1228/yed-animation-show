@@ -3,6 +3,7 @@
 var main = {
   logoDrawContainer: '',
   textTypingEffectInitDelay: 8000,
+  awardsVideoDelay: 15000,
 
   init() {
 
@@ -52,7 +53,7 @@ var main = {
         } else {
           backgroundFirework();
           main.countdownInit();
-          console.log(1);
+
         }
         var that = this;
         var delta = 150 - Math.random() * 100;
@@ -102,8 +103,29 @@ var main = {
     container.setAttribute('src', '/pages/countdown.html');
     container.scrollIntoView();
 
+    setTimeout(() => main.awardsVideoInit(), main.awardsVideoDelay)
+
   },
+
+  awardsVideoInit() {
+    let container = document.querySelector('.awards-video-container');
+    let backgroundFirework = document.getElementById('canvasBackgroundFirework');
+    let video = document.getElementById('awardsVideo');
+    let duration = video.duration;
+    setTimeout(() => {
+      backgroundFirework.style.display = 'none';
+      container.scrollIntoView();
+      video.play();
+      setTimeout(() => main.updateYearInit(), duration)
+    }, 2000);
+
+  },
+  updateYearInit() {
+
+  }
 };
+
+
 
 
 function backgroundFirework() {
