@@ -111,7 +111,7 @@ var main = {
     let container = document.querySelector('.awards-video-container');
     let backgroundFirework = document.getElementById('canvasBackgroundFirework');
     let video = document.getElementById('awardsVideo');
-    let duration = video.duration;
+    let duration = video.duration * 1000 + 2000;
     setTimeout(() => {
       backgroundFirework.style.display = 'none';
       container.scrollIntoView();
@@ -121,6 +121,11 @@ var main = {
 
   },
   updateYearInit() {
+    let container = document.querySelector('.update-year-section');
+    let iframe = document.querySelector('#updateYearIframe');
+    let iframeContent = iframe.contentWindow.document;
+    iframeContent.querySelector('.update-year-container').classList.add('is-active');
+    container.scrollIntoView();
 
   }
 };
