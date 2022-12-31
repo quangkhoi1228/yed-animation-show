@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <style>
+    HTML CSS JSResult Skip Results Iframe html,
+    body {
+      position: relative;
+      width: 100vw;
+      overflow-x: hidden !important;
+      font-family: 'proxima-nova', sans-serif;
+      color: #555;
+    }
+
+    .console {
+      position: fixed;
+      top: 10;
+      left: 10;
+    }
+
+    .video-thumbs-frame {
+      position: relative;
+      margin: 0 auto;
+      margin-top: 50px;
+      width: 375px;
+      height: 340px;
+      overflow: hidden !important;
+      -webkit-perspective: 250px;
+      perspective: 250px;
+      -webkit-user-select: none !important;
+      user-select: none !important;
+    }
+
+    .nav-arrows {
+      position: absolute;
+      width: 480px;
+      margin: 0 auto;
+      left: 0;
+      right: 0;
+      margin-top: 200px;
+      z-index: 0;
+    }
+
+    .nav-button {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .prev-button {
+      float: left;
+    }
+
+    .next-button {
+      float: right;
+    }
+
+    .video-thumbs {
+      position: relative;
+      display: block;
+      width: 1260px;
+      height: 335px;
+      margin-top: 25px;
+      z-index: 300;
+      transform: translateX(0);
+      transform-style: preserve-3d;
+      transition: all 0.2s ease-out;
+      -webkit-user-select: none !important;
+      user-select: none !important;
+    }
+
+    .video-thumbs.position-1 {
+      transform: translateX(0);
+      transition: all 0.2s ease-out;
+    }
+
+    .video-thumbs.position-2 {
+      transform: translateX(-300px);
+      transition: all 0.2s ease-out;
+    }
+
+    .video-thumbs.position-3 {
+      transform: translateX(-600px);
+      transition: all 0.2s ease-out;
+    }
+
+    .video-thumbs.position-4 {
+      transform: translateX(-900px);
+      transition: all 0.2s ease-out;
+    }
+
+    .video-thumb {
+      position: relative;
+      display: inline-block;
+      float: left;
+      background: #fff;
+      width: 260px;
+      height: 260px;
+      margin-left: 20px;
+      margin-right: 20px;
+      margin-bottom: 0;
+      border-radius: 2px;
+      box-shadow: 0px 8px 32px 0px rgba(0, 0, 0, 0.25);
+      transform: translateZ(-50px);
+      transform-style: preserve-3d;
+      -webkit-filter: brightness(0.7);
+      filter: brightness(0.7);
+      transition: all 0.2s ease-out;
+      z-index: 10;
+      -webkit-user-select: none !important;
+      user-select: none !important;
+    }
+
+    .video-thumb:nth-child(2n+1) {
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+
+    .video-thumb.thumb-1 {
+      margin-left: calc((375px - 260px)/2);
+    }
+
+    .video-thumb:hover {
+      box-shadow: 0px 3px 12px 0px rgba(0, 0, 0, 0.25);
+      transition: all 0.2s ease-out;
+    }
+
+    .video-thumb.active {
+      transform: translateZ(0);
+      transform-style: preserve-3d;
+      transition: all 0.2s ease-out;
+      z-index: 50;
+      -webkit-filter: brightness(1);
+      filter: brightness(1);
+    }
+
+    .video-thumb.clone {
+      position: absolute;
+      z-index: 0;
+    }
+
+    .video-thumb.first-clone {
+      position: absolute;
+      left: 0;
+      margin-left: calc(1260px - 3.5px);
+      z-index: 0;
+    }
+
+    .video-thumb.last-clone {
+      position: absolute;
+      left: 0;
+      margin-left: calc(-242.5px);
+      z-index: 0;
+    }
+
+    .video-thumb-wrapper {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 2px;
+      overflow: hidden !important;
+      -webkit-user-select: none !important;
+      user-select: none !important;
+    }
+
+    .video-thumbnail {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      width: 100%;
+      height: 154px;
+      overflow: hidden !important;
+      cursor: pointer;
+      -webkit-user-select: none !important;
+      user-select: none !important;
+    }
+
+    .video-thumb-img {
+      display: block;
+      height: 254px;
+      width: auto;
+      transform: translateX(-38.5px) translateY(-40px);
+      -webkit-user-select: none !important;
+      user-select: none !important;
+    }
+
+    .thumbnail-filter {}
+
+    .thumbnail-overlay {
+      position: absolute;
+      z-index: 501;
+      width: 100%;
+      height: 100%;
+      background-color: #1deaa9;
+      opacity: 0.1;
+      -webkit-mix-blend-mode: lighten;
+      mix-blend-mode: lighten;
+      -webkit-user-select: none !important;
+      user-select: none !important;
+    }
+
+    .video-thumb-overlay {
+      position: absolute;
+      display: block;
+      top: 0;
+      width: 75px;
+      height: 75px;
+      z-index: 20;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      margin-top: 79px;
+      transform: translateY(-50%);
+      -webkit-user-select: none !important;
+      user-select: none !important;
+    }
+
+    .video-play-icon {
+      position: relative;
+      width: 75px;
+      height: auto;
+      z-index: 501;
+      cursor: pointer;
+    }
+
+    .video-info-container {
+      position: absolute;
+      bottom: 0;
+      width: calc(100% - 20px);
+      height: 86px;
+      padding-left: 20px;
+      color: #555;
+      -webkit-user-select: none !important;
+      user-select: none !important;
+    }
+
+    .video-thumb-title {
+      font-size: 1.25em;
+      font-weight: 500;
+      line-height: 1.25em;
+      cursor: pointer;
+    }
+
+    .video-thumb-subtitle {
+      font-size: 0.85em;
+      font-weight: 300;
+      color: #a8a8a8;
+    }
+
+    .video-stats {
+      padding-top: 9px;
+      font-size: 0.7em;
+      font-weight: 400;
+      color: #c8c8c8;
+    }
+
+    .stats-item {
+      position: relative;
+      display: inline-block;
+      margin-right: 15px;
+    }
+
+    .item-views,
+    .item-likes {
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    .stats-icon {
+      width: 11px;
+      height: auto;
+      transform: translateY(-1px);
+    }
+  </style>
+</head>
+
+<body class="aclandmft-container ">
+  HTML CSS JSResult Skip Results Iframe
+  <div class="console">Console</div>
+
+  <div class="video-thumbs-frame">
+    <ul class="video-thumbs position-1" current-thumb="1" start-x=""
+      dragging="false">
+      <li class="video-thumb thumb-1 active" index="1"
+        youtube="https://www.youtube.com/embed/9KkKyHUw4f4?autoplay=1&amp;showinfo=0">
+        <div class="video-thumb-wrapper">
+          <div class="video-thumb-overlay"><img class="video-play-icon"
+              src="http://katehummer.com/drewmachak/img/icons/play-alt.svg">
+          </div>
+          <div class="video-info-container">
+            <article class="video-thumb-title">I'm Your President </article>
+            <article class="video-thumb-subtitle"> Drew Machak</article>
+            <div class="video-stats">
+              <article class="stats-item item-views">125 views</article>
+              <div class="stats-item item-likes"><img
+                  class="stats-icon thumbs-icon"
+                  src="http://katehummer.com/drewmachak/img/icons/thumbs-up-alt.svg"><span
+                  class="likes-count"> 2</span></div>
+              <a class="stats-item video-url" target="_blank"
+                href="https://www.youtube.com/watch?v=9KkKyHUw4f4"><img
+                  class="stats-icon video-link"
+                  src="http://katehummer.com/drewmachak/img/icons/link-alt.svg"></a>
+            </div>
+          </div>
+          <div class="video-thumbnail"><img
+              class="video-thumb-img thumbnail-filter"
+              src="https://i.ytimg.com/vi/9KkKyHUw4f4/hqdefault.jpg" alt="">
+          </div>
+        </div>
+      </li>
+      <li class="video-thumb"
+        youtube="https://www.youtube.com/embed/7GzRZnpTsbE?autoplay=1&amp;showinfo=0"
+        index="2">
+        <div class="video-thumb-wrapper">
+          <div class="video-thumb-overlay"><img class="video-play-icon"
+              src="http://katehummer.com/drewmachak/img/icons/play-alt.svg">
+          </div>
+          <div class="video-info-container">
+            <article class="video-thumb-title">Lost Without U </article>
+            <article class="video-thumb-subtitle"> Robin Thicke (Loop by Drew
+              Machak)</article>
+            <div class="video-stats">
+              <article class="stats-item item-views">64 views</article>
+              <div class="stats-item item-likes"><img
+                  class="stats-icon thumbs-icon"
+                  src="http://katehummer.com/drewmachak/img/icons/thumbs-up-alt.svg"><span
+                  class="likes-count"> 3</span></div>
+              <a class="stats-item video-url" target="_blank"
+                href="https://www.youtube.com/watch?v=7GzRZnpTsbE"><img
+                  class="stats-icon video-link"
+                  src="http://katehummer.com/drewmachak/img/icons/link-alt.svg"></a>
+            </div>
+          </div>
+          <div class="video-thumbnail"><img
+              class="video-thumb-img thumbnail-filter"
+              src="https://i.ytimg.com/vi/7GzRZnpTsbE/hqdefault.jpg" alt="">
+          </div>
+        </div>
+      </li>
+      <li class="video-thumb"
+        youtube="https://www.youtube.com/embed/hh4PgqsTYlM?autoplay=1&amp;showinfo=0"
+        index="3">
+        <div class="video-thumb-wrapper">
+          <div class="video-thumb-overlay"><img class="video-play-icon"
+              src="http://katehummer.com/drewmachak/img/icons/play-alt.svg">
+          </div>
+          <div class="video-info-container">
+            <article class="video-thumb-title">The Way You Make Me...</article>
+            <article class="video-thumb-subtitle"> Michael Jackson (Loop cover
+              by Dr...</article>
+            <div class="video-stats">
+              <article class="stats-item item-views">45 views</article>
+              <div class="stats-item item-likes"><img
+                  class="stats-icon thumbs-icon"
+                  src="http://katehummer.com/drewmachak/img/icons/thumbs-up-alt.svg"><span
+                  class="likes-count"> 2</span></div>
+              <a class="stats-item video-url" target="_blank"
+                href="https://www.youtube.com/watch?v=hh4PgqsTYlM"><img
+                  class="stats-icon video-link"
+                  src="http://katehummer.com/drewmachak/img/icons/link-alt.svg"></a>
+            </div>
+          </div>
+          <div class="video-thumbnail"><img
+              class="video-thumb-img thumbnail-filter"
+              src="https://i.ytimg.com/vi/hh4PgqsTYlM/hqdefault.jpg" alt="">
+          </div>
+        </div>
+      </li>
+      <li class="video-thumb"
+        youtube="https://www.youtube.com/embed/ognAQ6xI5hw?autoplay=1&amp;showinfo=0"
+        index="4">
+        <div class="video-thumb-wrapper">
+          <div class="video-thumb-overlay"><img class="video-play-icon"
+              src="http://katehummer.com/drewmachak/img/icons/play-alt.svg">
+          </div>
+          <div class="video-info-container">
+            <article class="video-thumb-title">Island Girl </article>
+            <article class="video-thumb-subtitle"> Davison Magpie (Drew Machak)
+            </article>
+            <div class="video-stats">
+              <article class="stats-item item-views">25 views</article>
+              <div class="stats-item item-likes"><img
+                  class="stats-icon thumbs-icon"
+                  src="http://katehummer.com/drewmachak/img/icons/thumbs-up-alt.svg"><span
+                  class="likes-count"> 2</span></div>
+              <a class="stats-item video-url" target="_blank"
+                href="https://www.youtube.com/watch?v=ognAQ6xI5hw"><img
+                  class="stats-icon video-link"
+                  src="http://katehummer.com/drewmachak/img/icons/link-alt.svg"></a>
+            </div>
+          </div>
+          <div class="video-thumbnail"><img
+              class="video-thumb-img thumbnail-filter"
+              src="https://i.ytimg.com/vi/ognAQ6xI5hw/hqdefault.jpg" alt="">
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <script>
+
+
+    $('.video-thumb:nth-child(1)').clone().appendTo('.video-thumbs').addClass('clone first-clone');
+
+    $('.video-thumbs').find('.video-thumb:nth-child(5)').removeClass('active thumb-1').attr('index', '5');
+
+    $('.video-thumb:nth-child(4)').clone().prependTo('.video-thumbs');
+
+    $('.video-thumbs').find('.video-thumb:nth-child(1)').removeClass('active').addClass('clone last-clone').attr('index', '0');
+
+
+    function nextVideoThumb() {
+      var currentThumb = parseInt($('.video-thumbs').attr('current-thumb'));
+      var totalThumbsInit = $('.video-thumb').length;
+      var totalThumbs = parseInt(totalThumbsInit - 2);
+      var activeClasses = $('.video-thumbs').attr('class');
+      var splitClasses = activeClasses.split(' ');
+      var thisClass = splitClasses[1];
+
+      $('.video-thumb').removeClass('active');
+
+      if (currentThumb < totalThumbs) {
+        var nextThumb = parseInt(currentThumb + 1);
+        var nextClass = 'position-' + nextThumb;
+        $('.video-thumbs').attr('current-thumb', nextThumb);
+        $('.video-thumbs').removeClass(thisClass);
+        $('.video-thumbs').addClass(nextClass);
+        $('.video-thumb[index=' + nextThumb + ']').addClass('active');
+
+      } else if (currentThumb == totalThumbs) {
+        var nextThumb = 1;
+        var nextClass = 'position-1';
+        $('.video-thumbs').attr('current-thumb', nextThumb);
+        $('.video-thumbs').removeClass(thisClass);
+        $('.video-thumbs').addClass(nextClass);
+        $('.video-thumb[index=' + nextThumb + ']').addClass('active');
+      }
+
+    };
+
+    function prevVideoThumb() {
+      var currentThumb = parseInt($('.video-thumbs').attr('current-thumb'));
+      var totalThumbsInit = $('.video-thumb').length;
+      var totalThumbs = parseInt(totalThumbsInit - 2);
+      var activeClasses = $('.video-thumbs').attr('class');
+      var splitClasses = activeClasses.split(' ');
+      var thisClass = splitClasses[1];
+
+      if (currentThumb > 1) {
+        var prevThumb = parseInt(currentThumb - 1);
+        var prevClass = 'position-' + prevThumb;
+        $('.video-thumbs').attr('current-thumb', prevThumb);
+        $('.video-thumbs').removeClass(thisClass);
+        $('.video-thumbs').addClass(prevClass);
+        $('.video-thumb[index=' + prevThumb + ']').addClass('active');
+
+      } else if (currentThumb == 1) {
+        var prevThumb = totalThumbs;
+        var prevClass = 'position-' + totalThumbs;
+        $('.video-thumbs').attr('current-thumb', prevThumb);
+        $('.video-thumbs').removeClass(thisClass);
+        $('.video-thumbs').addClass(prevClass);
+        $('.video-thumb[index=' + prevThumb + ']').addClass('active');
+      }
+    };
+
+    $('.video-thumbs-frame').on('swipeleft', nextVideoThumb);
+    $('.video-thumbs-frame').on('swiperight', prevVideoThumb);
+
+
+  </script>
+</body>
+
+</html>

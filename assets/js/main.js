@@ -9,13 +9,23 @@ var main = {
   happyNewYearDelay: 20000,
 
   init() {
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 300)
+    main.introButtonInit();
+  },
 
-    main.logoDrawInit();
+  introButtonInit() {
+    var container = document.querySelector('.intro-section');
+    var button = document.querySelector('.intro-section button');
+    button.onclick = () => { container.style.display = 'none'; main.logoDrawInit(); }
 
-    // main.openLetterInit();
   },
 
   logoDrawInit() {
+
+    var container = document.querySelector('#aclAndMftContainer');
+    container.classList.add('aclandmft-container');
 
     setTimeout(() => {
       window.scrollTo(0, 0);
