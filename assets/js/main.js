@@ -5,6 +5,8 @@ var main = {
   textTypingEffectInitDelay: 8000,
   awardsVideoDelay: 15000,
   openLetterDelay: 12000,
+  secondTextTypingEffectInitDelay: 8000,
+  happyNewYearDelay: 20000,
 
   init() {
 
@@ -113,9 +115,23 @@ var main = {
     document.body.appendChild(css);
     // };
 
+    setTimeout(() => main.happyNewYearInit(), main.secondTextTypingEffectInitDelay)
+
   },
   happyNewYearInit() {
+    var container = document.querySelector('.happy-new-year-container');
+    document.querySelector('#happyNewYearIframe').src = '/pages/happynewyear.html';
+    setTimeout(() => container.scrollIntoView(), 2000)
+      ;
 
+    setTimeout(() => main.funInit(), main.happyNewYearDelay);
+  },
+
+  funInit() {
+    var container = document.querySelector('.fun-container');
+    document.querySelector('#funIframe').src = '/pages/fun.html';
+    setTimeout(() => container.scrollIntoView(), 2000)
+      ;
   },
 };
 

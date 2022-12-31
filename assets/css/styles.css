@@ -800,7 +800,7 @@ body {
 }
 
 .letter-container.is-active {
-  height: 100vh;
+  height: 150vh;
   padding-bottom: 4rem;
   -webkit-animation: 2s letterMoveRightToLeft linear forwards;
           animation: 2s letterMoveRightToLeft linear forwards;
@@ -893,7 +893,7 @@ body {
   position: absolute;
   border: none;
   left: 3rem;
-  bottom: 4rem;
+  bottom: 40vh;
   cursor: pointer;
   opacity: 0.6;
   -webkit-transition: all 0.2s;
