@@ -4,12 +4,13 @@ var main = {
   logoDrawContainer: '',
   textTypingEffectInitDelay: 8000,
   awardsVideoDelay: 15000,
+  openLetterDelay: 12000,
 
   init() {
 
     main.logoDrawInit();
 
-
+    // main.openLetterInit();
   },
 
   logoDrawInit() {
@@ -127,7 +128,24 @@ var main = {
     iframeContent.querySelector('.update-year-container').classList.add('is-active');
     container.scrollIntoView();
 
-  }
+    setTimeout(() => main.openLetterInit(), main.openLetterDelay)
+
+  },
+  openLetterInit() {
+    let root = document.documentElement;
+    root.style.setProperty("--page-height", "200px");
+    document.querySelector("#content").style.display = "block";
+    document.querySelector("#base").classList.remove("increment");
+    var container = document.querySelector(".letter-container");
+    container.scrollIntoView();
+    setTimeout(() => container.classList.add("is-active"), 1000);
+
+    var button = document.querySelector('#letterNextButton');
+    button.onclick = () => main.secondTypingTextInit();
+  },
+  secondTypingTextInit() {
+    console.log('a')
+  },
 };
 
 

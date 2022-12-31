@@ -66,6 +66,7 @@ $acl-position-top: 20vh;
   top: 1rem;
   animation: fadeIn 2s linear $acl-and-mft-animation-duration/2 forwards;
   opacity: 0;
+  z-index: 10;
   .logo {
     text-align: center;
     img {
@@ -585,5 +586,105 @@ $acl-position-top: 20vh;
     100% {
       opacity: 1;
     }
+  }
+}
+
+:root {
+  --size-div: 3;
+  --page-width: 200px;
+  --page-height: 100px;
+}
+
+.letter-container {
+  margin: 0 0;
+  background: pink;
+  font-family: "Dancing  Script", cursive;
+  font-size: calc(8.3px * 3);
+  height: 100vh;
+  width: 100%;
+  opacity: 0;
+
+  &.is-active {
+    height: 100vh;
+
+    padding-bottom: 4rem;
+    animation: 2s letterMoveRightToLeft linear forwards;
+  }
+
+  .letter {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    vertical-align: middle;
+    justify-content: center;
+  }
+
+  .increment:hover {
+    --size-div: 3.1;
+  }
+
+  .letter .page {
+    background: rgb(255, 237, 237);
+    width: calc(200px * 4);
+    min-height: calc(100px * 3);
+    margin: auto;
+    border-radius: calc(3.3px * 3);
+    box-shadow: calc(1.3px * 3) calc(2.3px * 3) #888888;
+  }
+
+  .arrow-down {
+    width: 0;
+    height: 0;
+    border-left: calc(100px * 4) solid transparent;
+    border-right: calc(100px * 4) solid transparent;
+    border-radius: calc(3.3px * 4);
+    border-top: calc(60px * 4) solid #ffd4fa;
+  }
+
+  #content {
+    display: none;
+    text-align: left;
+    font-size: calc(7.8px * 3);
+
+    padding: 1rem;
+  }
+
+  #name {
+    padding: 1rem;
+    user-select: none;
+  }
+}
+
+@keyframes letterMoveRightToLeft {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.next-section-button {
+  display: flex;
+  box-shadow: none;
+  background: transparent;
+  position: absolute;
+  border: none;
+  left: 3rem;
+  bottom: 4rem;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: all 0.2s;
+  &:hover {
+    opacity: 1;
+  }
+  img {
+    width: 3rem;
+    height: 3rem;
   }
 }

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- <link rel="stylesheet" href="/assets/css/styles.css"> -->
+  <style>
+    :root {
+      --size-div: 3;
+      --page-width: 200px;
+      --page-height: 100px;
+    }
+
+    body {
+      margin: 0 0;
+      background: pink;
+      font-family: "Dancing  Script", cursive;
+      font-size: calc(8.3px * var(--size-div));
+    }
+
+    .letter {
+      display: grid;
+      place-items: center;
+      width: 100%;
+      position: absolute;
+      height: 100%;
+      vertical-align: middle;
+      justify-content: center;
+    }
+
+    .increment:hover {
+      --size-div: 3.1;
+    }
+
+    .letter .page {
+      background: rgb(255, 237, 237);
+      width: calc(var(--page-width) * var(--size-div));
+      height: calc(var(--page-height) * var(--size-div));
+      margin: auto;
+      border-radius: calc(3.3px * var(--size-div));
+      box-shadow: calc(1.3px * --size-div) calc(2.3px * var(--size-div)) #888888;
+    }
+
+    .arrow-down {
+      width: 0;
+      height: 0;
+      border-left: calc(100px * var(--size-div)) solid transparent;
+      border-right: calc(100px * var(--size-div)) solid transparent;
+      border-radius: calc(3.3px * var(--size-div));
+      border-top: calc(60px * var(--size-div)) solid #ffd4fa;
+    }
+
+    #content {
+      display: none;
+      text-align: left;
+      font-size: calc(7.8px * var(--size-div));
+      margin: 10px 10px;
+    }
+
+    #name {
+      padding: calc(26px * var(--size-div)) calc(7px * 3);
+      user-select: none;
+    }
+  </style>
+</head>
+
+<body class="letter-container ">
+  <div class="letter" onclick="display_letter()">
+    <div class="page increment" id="base">
+      <div class="arrow-down"></div>
+      <div id="name">By Alex</div>
+      <div id="content">Happy new year,
+        This is not surprising given that Ho Chi Minh City is the country’s
+        largest engine of economy, where businesses have been mushrooming
+        leading to the development of technology and requiring a large human
+        resource to sustain and promote that growth. According to statistics,
+        the average salary for programmers in Ho Chi Minh City is currently
+        maintained at 38.8 million VND/month while in Hanoi it is 34.3 million
+        VND/month and in Da Nang it is 27.6 million VND/month. This level of
+        income fluctuates differently depending on factors such as location,
+        programming language, experience,… However, the above figures do not
+        include other benefits of the company.
+
+
+      </div>
+    </div>
+  </div>
+  <script>let display_letter = () => {
+      let root = document.documentElement;
+
+      root.style.setProperty("--page-height", "200px");
+      document.querySelector("#content").style.display = "block";
+      document.querySelector("#base").classList.remove("increment");
+    };
+  </script>
+</body>
+
+</html>
