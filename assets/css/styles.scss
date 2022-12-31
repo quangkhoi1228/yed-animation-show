@@ -16,6 +16,13 @@ $acl-and-mft-length: 1977;
 $acl-position-left: 40vw;
 $acl-position-top: 20vh;
 
+.main {
+  display: none;
+  &.start {
+    display: block;
+  }
+}
+
 .intro-section {
   > img {
     width: 100%;
@@ -33,8 +40,8 @@ $acl-position-top: 20vh;
     height: 100%;
     cursor: pointer;
     transition: all 2s ease;
-    img{
-      &:hover{
+    img {
+      &:hover {
         transform: scale(1.2);
       }
     }
@@ -55,6 +62,35 @@ $acl-position-top: 20vh;
     stroke-dasharray: $acl-and-mft-length;
     animation: $acl-and-mft-animation-duration fillSvg linear,
       3s scaleAndMoveLeft linear $acl-and-mft-animation-duration/4 forwards;
+  }
+
+  .logo-left {
+    display: block;
+    padding: 0.25rem 1rem;
+    background: transparent;
+    position: fixed;
+    left: 1rem;
+    top: 1rem;
+    animation: fadeIn 2s linear $acl-and-mft-animation-duration/2 forwards;
+    opacity: 0;
+    z-index: 10;
+    .logo {
+      text-align: center;
+      img {
+        max-width: 8rem;
+      }
+
+      &.mft-logo-container {
+        img {
+          filter: invert(1);
+        }
+      }
+      &.acl-logo-container {
+        img {
+          margin: 0 1rem;
+        }
+      }
+    }
   }
 }
 
@@ -79,35 +115,6 @@ $acl-position-top: 20vh;
     left: 0;
     opacity: 0;
     top: -15vh;
-  }
-}
-
-.logo-left {
-  display: block;
-  padding: 0.25rem 1rem;
-  background: transparent;
-  position: fixed;
-  left: 1rem;
-  top: 1rem;
-  animation: fadeIn 2s linear $acl-and-mft-animation-duration/2 forwards;
-  opacity: 0;
-  z-index: 10;
-  .logo {
-    text-align: center;
-    img {
-      max-width: 8rem;
-    }
-
-    &.mft-logo-container {
-      img {
-        filter: invert(1);
-      }
-    }
-    &.acl-logo-container {
-      img {
-        margin: 0 1rem;
-      }
-    }
   }
 }
 

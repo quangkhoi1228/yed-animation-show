@@ -18,7 +18,7 @@ var main = {
   introButtonInit() {
     var container = document.querySelector('.intro-section');
     var button = document.querySelector('.intro-section button');
-    button.onclick = () => { container.style.display = 'none'; main.logoDrawInit(); }
+    button.onclick = () => { container.style.display = 'none'; document.querySelector('.main').classList.add('start'); main.logoDrawInit(); }
 
   },
 

@@ -12,6 +12,14 @@ body {
   margin: 0;
 }
 
+.main {
+  display: none;
+}
+
+.main.start {
+  display: block;
+}
+
 .intro-section > img {
   width: 100%;
   height: 100vh;
@@ -60,6 +68,36 @@ body {
   stroke-dasharray: 1977;
   -webkit-animation: 10s fillSvg linear, 3s scaleAndMoveLeft linear 2.5s forwards;
           animation: 10s fillSvg linear, 3s scaleAndMoveLeft linear 2.5s forwards;
+}
+
+.aclandmft-container .logo-left {
+  display: block;
+  padding: 0.25rem 1rem;
+  background: transparent;
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  -webkit-animation: fadeIn 2s linear 5s forwards;
+          animation: fadeIn 2s linear 5s forwards;
+  opacity: 0;
+  z-index: 10;
+}
+
+.aclandmft-container .logo-left .logo {
+  text-align: center;
+}
+
+.aclandmft-container .logo-left .logo img {
+  max-width: 8rem;
+}
+
+.aclandmft-container .logo-left .logo.mft-logo-container img {
+  -webkit-filter: invert(1);
+          filter: invert(1);
+}
+
+.aclandmft-container .logo-left .logo.acl-logo-container img {
+  margin: 0 1rem;
 }
 
 @-webkit-keyframes fillSvg {
@@ -112,36 +150,6 @@ body {
     opacity: 0;
     top: -15vh;
   }
-}
-
-.logo-left {
-  display: block;
-  padding: 0.25rem 1rem;
-  background: transparent;
-  position: fixed;
-  left: 1rem;
-  top: 1rem;
-  -webkit-animation: fadeIn 2s linear 5s forwards;
-          animation: fadeIn 2s linear 5s forwards;
-  opacity: 0;
-  z-index: 10;
-}
-
-.logo-left .logo {
-  text-align: center;
-}
-
-.logo-left .logo img {
-  max-width: 8rem;
-}
-
-.logo-left .logo.mft-logo-container img {
-  -webkit-filter: invert(1);
-          filter: invert(1);
-}
-
-.logo-left .logo.acl-logo-container img {
-  margin: 0 1rem;
 }
 
 @-webkit-keyframes fadeIn {
