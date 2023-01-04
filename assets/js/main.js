@@ -7,6 +7,7 @@ var main = {
   openLetterDelay: 12000,
   secondTextTypingEffectInitDelay: 8000,
   happyNewYearDelay: 20000,
+  isTypingTextFadeout: false,
 
   init() {
     setTimeout(() => {
@@ -40,7 +41,8 @@ var main = {
 
   textTypingEffectInit() {
     var container = document.querySelector('.effect-typing-text-container');
-    container.scrollIntoView()
+    container.scrollIntoView();
+    const lengths = [957, 958, 1167, 618];
 
     // window.onload = function () {
     var elements = document.getElementsByClassName('typewrite');
@@ -50,9 +52,9 @@ var main = {
       if (toRotate) {
         new TxtType(elements[i], JSON.parse(toRotate), period, function () {
 
-          backgroundFirework();
-          main.countdownInit();
-        });
+          // backgroundFirework();
+          // main.countdownInit();
+        }, lengths);
 
       }
     }
@@ -120,7 +122,7 @@ var main = {
       if (toRotate) {
         new TxtType(elements[i], JSON.parse(toRotate), period, function () {
           main.happyNewYearInit();
-        });
+        }, [975]);
 
       }
     }
@@ -585,12 +587,13 @@ l114.86-111.955C511.559,208.648,513.031,202.687,511.266,197.258z`;
 
 }
 
-var TxtType = function (el, toRotate, period, callback) {
+var TxtType = function (el, toRotate, period, callback, lengths) {
   this.toRotate = toRotate;
   this.el = el;
   this.loopNum = 0;
   this.period = parseInt(period, 10) || 2000;
   this.txt = '';
+  this.lengths = lengths;
   this.tick();
   this.isDeleting = false;
   this.callback = callback
@@ -603,8 +606,11 @@ TxtType.prototype.tick = function () {
 
     var fullTxt = this.toRotate[i];
 
+    var margin = (document.documentElement.clientWidth - this.lengths[i]) / 2;
+
     if (this.isDeleting) {
       this.txt = fullTxt.substring(0, this.txt.length - 1);
+
     } else {
       this.txt = fullTxt.substring(0, this.txt.length + 1);
     }
@@ -612,7 +618,9 @@ TxtType.prototype.tick = function () {
     // don't delete when last message
     if (!(this.isDeleting && this.loopNum == this.toRotate.length - 1)) {
 
-      this.el.innerHTML = '<span class="wrap">' + this.txt + '</span>';
+      this.el.innerHTML = `<span class="wrap" style="
+      margin-left: ${margin}px;
+  "> ${this.txt} </span>`;
     } else {
       this.callback();
       // backgroundFirework();
@@ -626,18 +634,36 @@ TxtType.prototype.tick = function () {
 
     if (!this.isDeleting && this.txt === fullTxt) {
       delta = this.period;
+      // this.isDeleting = true;
 
 
-      this.isDeleting = true;
+      setTimeout(() => {
+        this.isDeleting = true;
+        if (this.loopNum != this.toRotate.length - 1) {
+
+          this.el.classList.add('fade-out');
+          this.txt = '';
+
+        }
+      }, 2000);
+
+      delta = 2000;
+
+
+
 
     } else if (this.isDeleting && this.txt === '') {
       this.isDeleting = false;
       this.loopNum++;
+      this.el.classList.remove('fade-out');
+
       delta = 500;
+
     }
 
     setTimeout(function () {
       that.tick();
     }, delta);
+
   }
 };

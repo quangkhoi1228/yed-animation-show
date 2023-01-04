@@ -222,7 +222,21 @@ $acl-position-top: 50vh;
   }
 }
 
+.fade-out {
+  animation: fadeOut 2s linear forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 .effect-typing-text-container {
+  // justify-content: center;
   height: 100vh;
   width: 100%;
   max-width: 100%;
@@ -230,11 +244,11 @@ $acl-position-top: 50vh;
   text-decoration: none;
   display: flex;
   align-items: center;
-  padding: 2rem 20%;
+  // padding: 2rem;
   box-sizing: border-box;
   a {
     margin: 0;
-    font-size: 2rem;
+    font-size: 2.5vw;
     padding: 0;
     text-decoration: none;
     color: white;
