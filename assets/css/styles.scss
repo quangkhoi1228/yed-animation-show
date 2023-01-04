@@ -1,20 +1,21 @@
 :root {
   --primary: #217345;
 }
+
 html {
   font-size: 16px;
 }
 
 body {
-  background-color: black;
+  background-color: #171d2f;
   padding: 0;
   margin: 0;
 }
 
 $acl-and-mft-animation-duration: 10s;
 $acl-and-mft-length: 1977;
-$acl-position-left: 40vw;
-$acl-position-top: 20vh;
+$acl-position-left: 50%;
+$acl-position-top: 50vh;
 
 .main {
   display: none;
@@ -47,6 +48,10 @@ $acl-position-top: 20vh;
     }
   }
 }
+:root {
+  --bs-white: #fff;
+}
+
 .aclandmft-container {
   display: flex;
   justify-content: center;
@@ -55,9 +60,9 @@ $acl-position-top: 20vh;
   width: 90vw;
   height: 100vh;
 
-  svg {
+  .svg {
     position: absolute;
-    left: $acl-position-left;
+    right: $acl-position-left;
     top: $acl-position-top;
     stroke-dasharray: $acl-and-mft-length;
     animation: $acl-and-mft-animation-duration fillSvg linear,
@@ -65,32 +70,120 @@ $acl-position-top: 20vh;
   }
 
   .logo-left {
-    display: block;
+    display: flex;
     padding: 0.25rem 1rem;
     background: transparent;
     position: fixed;
-    left: 1rem;
+    right: 2rem;
     top: 1rem;
     animation: fadeIn 2s linear $acl-and-mft-animation-duration/2 forwards;
     opacity: 0;
     z-index: 10;
+    align-items: center;
     .logo {
       text-align: center;
       img {
-        max-width: 8rem;
-      }
-
-      &.mft-logo-container {
-        img {
-          filter: invert(1);
-        }
-      }
-      &.acl-logo-container {
-        img {
-          margin: 0 1rem;
-        }
+        max-height: 2rem;
+        margin: 1rem 2rem 0 0;
       }
     }
+  }
+
+  .drawtext {
+    --width: 40vw;
+    width: var(--width);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: calc(var(--width) / -2);
+  }
+
+  .drawtext-may {
+    margin-top: -15vw;
+  }
+
+  .drawtext-acl {
+    margin-top: 0;
+  }
+
+  #svg2,
+  #svg3 {
+    width: 100%;
+  }
+
+  #ACL,
+  #MAY {
+    /* animation: txtanimg 18s -1s forwards; */
+    vector-effect: non-scaling-stroke;
+  }
+
+  #ACL path,
+  #MAY path {
+    stroke-width: 3;
+    stroke: inherit;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    stroke: var(--bs-white);
+    stroke-miterlimit: 3;
+    fill: none;
+    vector-effect: non-scaling-stroke;
+    transform: inherit;
+    stroke-dashoffset: 100;
+    stroke-dasharray: 0.1, 100000;
+    animation-fill-mode: none;
+    animation: txtanim 18s 3s forwards;
+  }
+
+  #ACL path.t1 {
+    animation-delay: 0s;
+  }
+
+  #ACL path.t2 {
+    animation-delay: 1s;
+  }
+
+  #MAY path.t1 {
+    animation-delay: 0s;
+  }
+
+  #MAY path.t2 {
+    animation-delay: 1s;
+  }
+}
+
+@keyframes txtanim {
+  0% {
+    stroke-dasharray: 0, 100000;
+  }
+
+  35% {
+    stroke-dasharray: 940, 100000;
+  }
+
+  65% {
+    stroke-dasharray: 940, 100000;
+  }
+
+  100% {
+    stroke-dasharray: 100000, 100000;
+  }
+}
+
+@keyframes txtanimg {
+  0% {
+    opacity: 1;
+  }
+
+  68% {
+    opacity: 1;
+  }
+
+  71% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
   }
 }
 
@@ -106,25 +199,25 @@ $acl-position-top: 20vh;
 @keyframes scaleAndMoveLeft {
   0% {
     transform: scale(1);
-    left: $acl-position-left;
+    right: $acl-position-left;
     top: $acl-position-top;
     opacity: 1;
   }
   100% {
     transform: scale(0.2);
-    left: 0;
+    right: 10vw;
     opacity: 0;
-    top: -15vh;
+    top: 10vh;
   }
 }
 
 @keyframes fadeIn {
   0% {
-    transform: translate3d(2rem, 2rem, 0);
+    transform: translate3d(0, 2rem, 0);
     opacity: 0;
   }
   100% {
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(2rem, 0, 0);
     opacity: 1;
   }
 }

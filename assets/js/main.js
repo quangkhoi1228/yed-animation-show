@@ -13,6 +13,11 @@ var main = {
       window.scrollTo(0, 0);
     }, 300)
     main.introButtonInit();
+    var container = document.querySelector('.intro-section');
+
+    container.style.display = 'none'; document.querySelector('.main').classList.add('start');
+    main.logoDrawInit();
+
   },
 
   introButtonInit() {
@@ -44,6 +49,7 @@ var main = {
       var period = elements[i].getAttribute('data-period');
       if (toRotate) {
         new TxtType(elements[i], JSON.parse(toRotate), period, function () {
+
           backgroundFirework();
           main.countdownInit();
         });
@@ -146,9 +152,10 @@ var main = {
 };
 
 
-
-
 function backgroundFirework() {
+
+
+
 
   /********************
       Animation Frame
@@ -229,7 +236,7 @@ function backgroundFirework() {
     this.acceleration = 1.05;
     this.brightness = random(50, 70);
     // circle target indicator radius
-    this.targetRadius = 1;
+    this.targetRadius = 2;
   }
 
   // update firework
@@ -573,6 +580,9 @@ l114.86-111.955C511.559,208.648,513.031,202.687,511.266,197.258z`;
     }, 1000);
 
   });
+
+
+
 }
 
 var TxtType = function (el, toRotate, period, callback) {
