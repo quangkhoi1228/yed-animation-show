@@ -52,8 +52,9 @@ var main = {
       if (toRotate) {
         new TxtType(elements[i], JSON.parse(toRotate), period, function () {
 
-          // backgroundFirework();
-          // main.countdownInit();
+          backgroundFirework();
+          backgroundFirework();
+          main.countdownInit();
         }, lengths);
 
       }
