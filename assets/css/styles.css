@@ -10,6 +10,7 @@ body {
   background-color: #171d2f;
   padding: 0;
   margin: 0;
+  font-family: "Nunito Sans", sans-serif;
 }
 
 .main {
@@ -363,7 +364,6 @@ body {
 
 .countdown-container {
   background: var(--primary);
-  font-family: "Arial", sans-serif;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -400,7 +400,6 @@ body {
 .countdown-container button {
   position: relative;
   font-size: 1.3rem;
-  font-family: monospace, sans-serif;
   max-width: 25ch;
   width: auto;
   text-align: left;
@@ -431,7 +430,6 @@ body {
 
 .countdown-container .box-time {
   text-align: center;
-  font-family: "Kalam", cursive;
 }
 
 .countdown-container .box-time a {
@@ -497,13 +495,14 @@ body {
   width: 100%;
   font-size: 100px;
   font-weight: 700;
-  color: #f48fb1;
+  color: white;
   text-align: center;
   position: absolute;
   top: 50%;
   opacity: 0;
   -webkit-animation: vem_feliz 2s ease-in-out 7s forwards;
           animation: vem_feliz 2s ease-in-out 7s forwards;
+  text-shadow: 0 0 10px #fff, 0 0 16px #fff;
 }
 
 .update-year-container.is-active .ano_novo {
@@ -530,10 +529,10 @@ body {
 }
 
 .update-year-container.is-active .ano_novo > span {
-  font-family: "Montserrat", sans-serif;
   font-size: 175px;
   font-weight: 700;
-  color: #7a8fe8;
+  color: white;
+  text-shadow: 0 0 10px #fff, 0 0 16px #fff;
 }
 
 .update-year-container.is-active span.seis {
@@ -559,7 +558,7 @@ body {
   height: 6px;
   display: block;
   border-radius: 3px;
-  background: #7a8fe8;
+  background: white;
   -webkit-transform: rotate(0deg);
           transform: rotate(0deg);
   -webkit-transform-origin: left top;
@@ -576,7 +575,7 @@ body {
   width: 100px;
   height: 100px;
   display: block;
-  background: #e8d57a;
+  background: #ff914d;
   border-radius: 50%;
   position: absolute;
   top: 50%;
@@ -977,7 +976,6 @@ body {
 .letter-container {
   margin: 0 0;
   background: pink;
-  font-family: "Dancing  Script", cursive;
   font-size: calc(8.3px * 3);
   height: 100vh;
   width: 100%;
