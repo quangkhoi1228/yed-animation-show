@@ -1202,7 +1202,7 @@ body {
 }
 
 .fun-container.is-active {
-  -webkit-animation: countdown 1s forwards;
-          animation: countdown 1s forwards;
+  -webkit-animation: countdown 2s forwards;
+          animation: countdown 2s forwards;
 }
 /*# sourceMappingURL=styles.css.map */
