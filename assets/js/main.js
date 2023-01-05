@@ -33,11 +33,77 @@ var main = {
     // // }, 3000)
   },
 
+  pauseAudio(audio) {
+    let interval = setInterval(() => {
+      if (audio.volume <= 0) {
+        audio.pause();
+        clearInterval(interval);
+      }
+      if (audio.volume >= 0.1) { audio.volume -= 0.1; }
+    }, 100);
+
+    // setTimeout(() => audio.pause(), 3000)
+  },
+
+  playAudio(audio) {
+
+    if (audio == main.aclAndMftAudio) {
+      main.aclAndMftAudio.pause()
+
+      main.aclAndMftAudio.currentTime = 0;
+      main.aclAndMftAudio.volume = 0.5;
+      main.aclAndMftAudio.play()
+    }
+
+    if (audio == main.typingAudio) {
+      main.typingAudio.pause()
+      main.typingAudio.currentTime = 0;
+      main.typingAudio.volume = 1;
+      main.typingAudio.play()
+    }
+
+    if (audio == main.countdownAudio) {
+      main.countdownAudio.pause()
+
+      main.countdownAudio.currentTime = 0;
+      main.countdownAudio.volume = 1;
+      main.countdownAudio.play()
+    }
+
+    if (audio == main.ncsAudio) {
+      main.ncsAudio.pause()
+      main.ncsAudio.currentTime = 0;
+      main.ncsAudio.volume = 0.2;
+      main.ncsAudio.play()
+    }
+
+
+
+    // let max = 1;
+
+    // // if (audio == main.aclAndMftAudio || audio == main.ncsAudio) {
+    // //   max = 0.5;
+    // // }
+    // audio.volume = 0;
+    // console.log(audio);
+    // let interval = setInterval(() => {
+    //   if (audio.volume >= max) {
+    //     console.log(audio.volume);
+    //     audio.play();
+    //     clearInterval(interval);
+    //   }
+    //   if (audio.volume <= (max - 0.1)) { audio.volume += 0.1; }
+    // }, 100);
+
+    // setTimeout(() => audio.pause(), 3000)
+  },
+
   audioInit() {
     main.aclAndMftAudio = new Audio('/assets/files/aclandmft.mp3');
     main.typingAudio = new Audio('/assets/files/typing-audio.mp3');
     main.countdownAudio = new Audio('/assets/files/countdown.mp3');
     main.ncsAudio = new Audio('/assets/files/ncs.mp3');
+    main.ncsAudio.volume = 0.5;
   },
 
   introButtonInit() {
@@ -54,17 +120,21 @@ var main = {
 
     setTimeout(() => {
       window.scrollTo(0, 0);
-      main.aclAndMftAudio.play();
+      // main.aclAndMftAudio.play();
+      main.playAudio(main.aclAndMftAudio);
+
     }, 300)
     setTimeout(() => {
       main.textTypingEffectInit();
-      main.aclAndMftAudio.pause();
+      main.pauseAudio(main.aclAndMftAudio);
     }, main.textTypingEffectInitDelay)
   },
 
   textTypingEffectInit() {
 
-    main.typingAudio.play();
+    // main.typingAudio.play();
+    // main.playAudio(main.typingAudio);
+
     var container = document.querySelector('.effect-typing-text-container');
     container.scrollIntoView();
     const lengths = [26, 27, 32, 16];
@@ -79,10 +149,11 @@ var main = {
 
           // backgroundFirework();
           backgroundFireworkNew();
-          main.typingAudio.pause();
+          // main.pauseAudio(main.typingAudio);
+
 
           main.countdownInit();
-        }, lengths);
+        }, lengths, main.typingAudio);
 
       }
     }
@@ -97,7 +168,9 @@ var main = {
 
   countdownInit() {
 
-    main.countdownAudio.play();
+    // main.countdownAudio.play();
+    main.playAudio(main.countdownAudio);
+
 
     let container = document.querySelector('#countdownIframe');
     // container.classList.add('is-active');
@@ -106,7 +179,9 @@ var main = {
 
     setTimeout(() => {
       main.awardsVideoInit();
-      main.countdownAudio.pause();
+      main.pauseAudio(main.countdownAudio);
+
+      // main.countdownAudio.pause();
     }, main.awardsVideoDelay)
 
   },
@@ -125,7 +200,9 @@ var main = {
 
   },
   updateYearInit() {
-    main.ncsAudio.play()
+    // main.ncsAudio.play()
+    main.playAudio(main.ncsAudio);
+
     backgroundFireworkNew();
     let container = document.querySelector('.update-year-section');
     let iframe = document.querySelector('#updateYearIframe');
@@ -154,7 +231,9 @@ var main = {
       cursor.classList.add("is-active");
 
       setTimeout(() => {
-        main.ncsAudio.pause();
+        // main.ncsAudio.pause();
+
+        main.pauseAudio(main.ncsAudio);
 
         letterVideoContainer.classList.add('is-active');
         letterVideo.play();
@@ -169,7 +248,8 @@ var main = {
 
   },
   secondTypingTextInit() {
-    main.typingAudio.play()
+    // main.playAudio(main.typingAudio);
+    // main.typingAudio.play()
     var container = document.querySelector('.effect-typing-text-container.second');
     container.scrollIntoView();
     var element = document.querySelector('.typewrite1');
@@ -179,8 +259,10 @@ var main = {
     if (toRotate) {
       new TxtType(element, JSON.parse(toRotate), period, function () {
         main.happyNewYearInit();
-        main.typingAudio.pause();
-      }, [29]);
+        // main.typingAudio.pause();
+        // main.pauseAudio(main.typingAudio);
+
+      }, [29], main.typingAudio);
 
     }
 
@@ -195,7 +277,9 @@ var main = {
 
   },
   happyNewYearInit() {
-    main.ncsAudio.play()
+    // main.ncsAudio.play();
+    main.playAudio(main.ncsAudio);
+
     var container = document.querySelector('.happy-new-year-container');
     document.querySelector('#happyNewYearIframe').src = '/pages/happynewyear.html';
     container.scrollIntoView()
@@ -810,7 +894,7 @@ l114.86-111.955C511.559,208.648,513.031,202.687,511.266,197.258z`;
 
 }
 
-var TxtType = function (el, toRotate, period, callback, lengths) {
+var TxtType = function (el, toRotate, period, callback, lengths, audio) {
   this.toRotate = toRotate;
   this.el = el;
   this.loopNum = 0;
@@ -821,11 +905,22 @@ var TxtType = function (el, toRotate, period, callback, lengths) {
   this.isDeleting = false;
   this.callback = callback;
   this.hasCallback = false;
+  this.audio = this.audio;
 };
 
 TxtType.prototype.tick = function () {
   var i = this.loopNum % this.toRotate.length;
+
+
   if (this.loopNum < this.toRotate.length) {
+
+    if (this.txt == '') {
+      // console.log(this.audio);
+      main.typingAudio.pause();
+      main.typingAudio.currentTime = 0;
+      main.typingAudio.play();
+    }
+
 
 
     var fullTxt = this.toRotate[i];
@@ -846,7 +941,11 @@ TxtType.prototype.tick = function () {
       margin-left: ${margin}px;
   "> ${this.txt} </span>`;
     } else {
-      !this.hasCallback && this.callback();
+
+      if (!this.hasCallback) {
+        main.typingAudio.pause();
+        this.callback();
+      }
 
       this.hasCallback = true;
 
@@ -862,11 +961,14 @@ TxtType.prototype.tick = function () {
     if (!this.isDeleting && this.txt === fullTxt) {
       delta = this.period;
       // this.isDeleting = true;
+      main.typingAudio.pause();
 
 
       this.isDeleting = true;
       if ((this.loopNum != this.toRotate.length - 1) && this.toRotate.length != 1) {
         this.el.classList.add('fade-out');
+
+
         setTimeout(() => {
           this.txt = '';
         }, 2000);
