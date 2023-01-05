@@ -8,19 +8,36 @@ var main = {
   secondTextTypingEffectInitDelay: 8000,
   happyNewYearDelay: 18000,
   isTypingTextFadeout: false,
+  aclAndMftAudio: '',
+  typingAudio: '',
+  countdownAudio: '',
+  ncsAudio: '',
 
   init() {
+
+
     setTimeout(() => {
       window.scrollTo(0, 0);
     }, 300)
     main.introButtonInit();
+
+    main.audioInit();
+
+
     // var container = document.querySelector('.intro-section');
 
     // container.style.display = 'none'; document.querySelector('.main').classList.add('start');
     // main.logoDrawInit();
-    // setTimeout(() => {
-    //   main.openLetterInit();
-    // }, 3000)
+    // // setTimeout(() => {
+    // //   main.openLetterInit();
+    // // }, 3000)
+  },
+
+  audioInit() {
+    main.aclAndMftAudio = new Audio('/assets/files/aclandmft.mp3');
+    main.typingAudio = new Audio('/assets/files/typing-audio.mp3');
+    main.countdownAudio = new Audio('/assets/files/countdown.mp3');
+    main.ncsAudio = new Audio('/assets/files/ncs.mp3');
   },
 
   introButtonInit() {
@@ -37,11 +54,17 @@ var main = {
 
     setTimeout(() => {
       window.scrollTo(0, 0);
+      main.aclAndMftAudio.play();
     }, 300)
-    setTimeout(() => { main.textTypingEffectInit() }, main.textTypingEffectInitDelay)
+    setTimeout(() => {
+      main.textTypingEffectInit();
+      main.aclAndMftAudio.pause();
+    }, main.textTypingEffectInitDelay)
   },
 
   textTypingEffectInit() {
+
+    main.typingAudio.play();
     var container = document.querySelector('.effect-typing-text-container');
     container.scrollIntoView();
     const lengths = [26, 27, 32, 16];
@@ -56,6 +79,8 @@ var main = {
 
           // backgroundFirework();
           backgroundFireworkNew();
+          main.typingAudio.pause();
+
           main.countdownInit();
         }, lengths);
 
@@ -72,12 +97,17 @@ var main = {
 
   countdownInit() {
 
+    main.countdownAudio.play();
+
     let container = document.querySelector('#countdownIframe');
     // container.classList.add('is-active');
     container.setAttribute('src', '/pages/countdown.html');
     container.scrollIntoView();
 
-    setTimeout(() => main.awardsVideoInit(), main.awardsVideoDelay)
+    setTimeout(() => {
+      main.awardsVideoInit();
+      main.countdownAudio.pause();
+    }, main.awardsVideoDelay)
 
   },
 
@@ -95,7 +125,7 @@ var main = {
 
   },
   updateYearInit() {
-
+    main.ncsAudio.play()
     backgroundFireworkNew();
     let container = document.querySelector('.update-year-section');
     let iframe = document.querySelector('#updateYearIframe');
@@ -103,11 +133,15 @@ var main = {
     iframeContent.querySelector('.update-year-container').classList.add('is-active');
     container.scrollIntoView();
 
-    setTimeout(() => main.openLetterInit(), main.openLetterDelay)
+    setTimeout(() => {
+      main.openLetterInit();
+    }, main.openLetterDelay)
 
   },
   openLetterInit() {
+
     stopBackgroundFirework();
+
 
     var container = document.querySelector(".letter-container");
     container.scrollIntoView();
@@ -120,6 +154,8 @@ var main = {
       cursor.classList.add("is-active");
 
       setTimeout(() => {
+        main.ncsAudio.pause();
+
         letterVideoContainer.classList.add('is-active');
         letterVideo.play();
 
@@ -133,6 +169,7 @@ var main = {
 
   },
   secondTypingTextInit() {
+    main.typingAudio.play()
     var container = document.querySelector('.effect-typing-text-container.second');
     container.scrollIntoView();
     var element = document.querySelector('.typewrite1');
@@ -142,6 +179,7 @@ var main = {
     if (toRotate) {
       new TxtType(element, JSON.parse(toRotate), period, function () {
         main.happyNewYearInit();
+        main.typingAudio.pause();
       }, [29]);
 
     }
@@ -157,6 +195,7 @@ var main = {
 
   },
   happyNewYearInit() {
+    main.ncsAudio.play()
     var container = document.querySelector('.happy-new-year-container');
     document.querySelector('#happyNewYearIframe').src = '/pages/happynewyear.html';
     container.scrollIntoView()
