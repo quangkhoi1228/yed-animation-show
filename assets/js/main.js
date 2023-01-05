@@ -6,7 +6,7 @@ var main = {
   awardsVideoDelay: 15000,
   openLetterDelay: 12000,
   secondTextTypingEffectInitDelay: 8000,
-  happyNewYearDelay: 20000,
+  happyNewYearDelay: 18000,
   isTypingTextFadeout: false,
 
   init() {
@@ -14,11 +14,13 @@ var main = {
       window.scrollTo(0, 0);
     }, 300)
     main.introButtonInit();
-    var container = document.querySelector('.intro-section');
+    // var container = document.querySelector('.intro-section');
 
-    container.style.display = 'none'; document.querySelector('.main').classList.add('start');
-    main.logoDrawInit();
-
+    // container.style.display = 'none'; document.querySelector('.main').classList.add('start');
+    // main.logoDrawInit();
+    // setTimeout(() => {
+    //   main.openLetterInit();
+    // }, 3000)
   },
 
   introButtonInit() {
@@ -42,7 +44,7 @@ var main = {
   textTypingEffectInit() {
     var container = document.querySelector('.effect-typing-text-container');
     container.scrollIntoView();
-    const lengths = [957, 958, 1167, 618];
+    const lengths = [26, 27, 32, 16];
 
     // window.onload = function () {
     var elements = document.getElementsByClassName('typewrite');
@@ -69,6 +71,7 @@ var main = {
   },
 
   countdownInit() {
+
     let container = document.querySelector('#countdownIframe');
     // container.classList.add('is-active');
     container.setAttribute('src', '/pages/countdown.html');
@@ -79,6 +82,7 @@ var main = {
   },
 
   awardsVideoInit() {
+
     let container = document.querySelector('.awards-video-container');
     let video = document.getElementById('awardsVideo');
     let duration = video.duration * 1000 + 2000;
@@ -91,6 +95,7 @@ var main = {
 
   },
   updateYearInit() {
+
     backgroundFireworkNew();
     let container = document.querySelector('.update-year-section');
     let iframe = document.querySelector('#updateYearIframe');
@@ -103,31 +108,44 @@ var main = {
   },
   openLetterInit() {
     stopBackgroundFirework();
-    let root = document.documentElement;
-    root.style.setProperty("--page-height", "200px");
-    document.querySelector("#content").style.display = "block";
-    document.querySelector("#base").classList.remove("increment");
+
     var container = document.querySelector(".letter-container");
     container.scrollIntoView();
-    setTimeout(() => container.classList.add("is-active"), 1000);
+    let cursor = container.querySelector('.cursor-container');
+    let letterVideoContainer = container.querySelector('.letter-video-container');
+    let letterVideo = letterVideoContainer.querySelector('#letterVideo');
+    let duration = letterVideo.duration * 1000 + 2000;
 
-    var button = document.querySelector('#letterNextButton');
-    button.onclick = () => main.secondTypingTextInit();
+    setTimeout(() => {
+      cursor.classList.add("is-active");
+
+      setTimeout(() => {
+        letterVideoContainer.classList.add('is-active');
+        letterVideo.play();
+
+        setTimeout(() => {
+          letterVideoContainer.classList.remove('is-active');
+          main.secondTypingTextInit();
+        }, duration)
+      }, 4000)
+
+    }, 1000);
+
   },
   secondTypingTextInit() {
     var container = document.querySelector('.effect-typing-text-container.second');
     container.scrollIntoView();
-    var elements = document.getElementsByClassName('typewrite1');
-    for (var i = 0; i < elements.length; i++) {
-      var toRotate = elements[i].getAttribute('data-type');
-      var period = elements[i].getAttribute('data-period');
-      if (toRotate) {
-        new TxtType(elements[i], JSON.parse(toRotate), period, function () {
-          main.happyNewYearInit();
-        }, [975]);
+    var element = document.querySelector('.typewrite1');
 
-      }
+    var toRotate = element.getAttribute('data-type');
+    var period = element.getAttribute('data-period');
+    if (toRotate) {
+      new TxtType(element, JSON.parse(toRotate), period, function () {
+        main.happyNewYearInit();
+      }, [29]);
+
     }
+
     // INJECT CSS
     var css = document.createElement("style");
     css.type = "text/css";
@@ -135,22 +153,22 @@ var main = {
     document.body.appendChild(css);
     // };
 
-    setTimeout(() => main.happyNewYearInit(), main.secondTextTypingEffectInitDelay)
+    // setTimeout(() => main.happyNewYearInit(), main.secondTextTypingEffectInitDelay)
 
   },
   happyNewYearInit() {
     var container = document.querySelector('.happy-new-year-container');
     document.querySelector('#happyNewYearIframe').src = '/pages/happynewyear.html';
-    setTimeout(() => container.scrollIntoView(), 2000)
-      ;
+    container.scrollIntoView()
+    // setTimeout(() => container.scrollIntoView(), 2000);
 
     setTimeout(() => main.funInit(), main.happyNewYearDelay);
   },
 
   funInit() {
+    console.log('1123123');
     var container = document.querySelector('.fun-container');
-    document.querySelector('#funIframe').src = '/pages/fun.html';
-    setTimeout(() => container.scrollIntoView(), 2000)
+    setTimeout(() => { container.scrollIntoView(); container.classList.add('is-active') }, 2000)
       ;
   },
 };
@@ -762,7 +780,8 @@ var TxtType = function (el, toRotate, period, callback, lengths) {
   this.lengths = lengths;
   this.tick();
   this.isDeleting = false;
-  this.callback = callback
+  this.callback = callback;
+  this.hasCallback = false;
 };
 
 TxtType.prototype.tick = function () {
@@ -772,7 +791,7 @@ TxtType.prototype.tick = function () {
 
     var fullTxt = this.toRotate[i];
 
-    var margin = (document.documentElement.clientWidth - this.lengths[i]) / 2;
+    var margin = (document.documentElement.clientWidth - this.lengths[i] * 32) * 0.9 / 2;
 
     if (this.isDeleting) {
       this.txt = fullTxt.substring(0, this.txt.length - 1);
@@ -788,7 +807,10 @@ TxtType.prototype.tick = function () {
       margin-left: ${margin}px;
   "> ${this.txt} </span>`;
     } else {
-      this.callback();
+      !this.hasCallback && this.callback();
+
+      this.hasCallback = true;
+
       // backgroundFirework();
       // main.countdownInit();
 
@@ -804,7 +826,7 @@ TxtType.prototype.tick = function () {
 
 
       this.isDeleting = true;
-      if (this.loopNum != this.toRotate.length - 1) {
+      if ((this.loopNum != this.toRotate.length - 1) && this.toRotate.length != 1) {
         this.el.classList.add('fade-out');
         setTimeout(() => {
           this.txt = '';
