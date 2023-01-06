@@ -4,7 +4,7 @@ var main = {
   logoDrawContainer: '',
   textTypingEffectInitDelay: 8000,
   awardsVideoDelay: 15000,
-  openLetterDelay: 12000,
+  openLetterDelay: 15000,
   secondTextTypingEffectInitDelay: 8000,
   happyNewYearDelay: 18000,
   isTypingTextFadeout: false,
