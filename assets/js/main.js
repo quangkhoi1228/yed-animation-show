@@ -289,7 +289,6 @@ var main = {
   },
 
   funInit() {
-    console.log('1123123');
     backgroundFireworkNew();
     var container = document.querySelector('.fun-container');
     setTimeout(() => {
@@ -298,7 +297,7 @@ var main = {
       setTimeout(() => {
         main.jerryInit();
       }, 2000);
-    }, 4000);
+    }, 6000);
 
   },
 
@@ -930,7 +929,6 @@ TxtType.prototype.tick = function () {
   if (this.loopNum < this.toRotate.length) {
 
     if (this.txt == '') {
-      // console.log(this.audio);
       main.typingAudio.pause();
       main.typingAudio.currentTime = 0;
       main.typingAudio.play();
