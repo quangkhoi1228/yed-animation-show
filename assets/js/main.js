@@ -186,7 +186,18 @@ var main = {
 
   },
 
+  hiddenLogo() {
+    var logo = document.querySelector('.logo-left');
+    logo.style.display = 'none';
+  },
+
+  showLogo() {
+    var logo = document.querySelector('.logo-left');
+    logo.style.display = 'flex';
+  },
+
   awardsVideoInit() {
+    main.hiddenLogo();
 
     let container = document.querySelector('.awards-video-container');
     let video = document.getElementById('awardsVideo');
@@ -196,8 +207,10 @@ var main = {
     setTimeout(() => {
       stopBackgroundFirework();
       container.scrollIntoView();
-      video.play();
-      setTimeout(() => main.updateYearInit(), duration)
+      // video.play();
+      setTimeout(() => {
+        main.updateYearInit(); main.showLogo();
+      }, duration)
     }, 2000);
 
   },
@@ -230,6 +243,7 @@ var main = {
     let duration = letterVideo.duration * 1000 + 2000;
 
     setTimeout(() => {
+      main.hiddenLogo();
       cursor.classList.add("is-active");
 
       setTimeout(() => {
@@ -242,6 +256,7 @@ var main = {
 
         setTimeout(() => {
           letterVideoContainer.classList.remove('is-active');
+          main.showLogo();
           main.secondTypingTextInit();
         }, duration)
       }, 4000)
