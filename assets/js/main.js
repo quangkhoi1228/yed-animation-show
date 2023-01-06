@@ -306,6 +306,8 @@ var main = {
     stopBackgroundFirework();
     var container = document.querySelector('#jerryContainer');
     container.scrollIntoView();
+    var video = document.getElementById('jerryVideo');
+    video.play();
   }
 };
 
