@@ -290,10 +290,23 @@ var main = {
 
   funInit() {
     console.log('1123123');
+    backgroundFireworkNew();
     var container = document.querySelector('.fun-container');
-    setTimeout(() => { container.scrollIntoView(); container.classList.add('is-active') }, 2000)
-      ;
+    setTimeout(() => {
+      container.scrollIntoView(); container.classList.add('is-active');
+
+      setTimeout(() => {
+        main.jerryInit();
+      }, 2000);
+    }, 4000);
+
   },
+
+  jerryInit() {
+    stopBackgroundFirework();
+    var container = document.querySelector('#jerryContainer');
+    container.scrollIntoView();
+  }
 };
 
 function stopBackgroundFirework() {
