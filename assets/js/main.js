@@ -225,7 +225,7 @@ var main = {
     let container = document.querySelector('.awards-video-container');
     let video = document.getElementById('awardsVideo');
     video.src = 'https://player.vimeo.com/video/786847058?h=619dae710a&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&autoplay=1&mute=0'
-    let duration = (4 * 60 + 51) * 1000 + 3000;
+    let duration = (4 * 60 + 51) * 1000 + 2000;
     // let duration = video.duration;
     setTimeout(() => {
       stopBackgroundFirework();
@@ -266,7 +266,7 @@ var main = {
 
     // let duration = letterVideo.duration * 1000 + 2000;
 
-    let duration = (1 * 60 + 3) * 1000 + 3000;
+    let duration = (1 * 60 + 3) * 1000 + 2000;
 
     setTimeout(() => {
       main.hiddenLogo();
