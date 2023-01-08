@@ -19,7 +19,12 @@
 
 <body>
   <section class="intro-section iframe-fullscreen">
-    <img src="/assets/images/2023.png" alt="">
+    <video id="introVideo" class="iframe-fullscreen" style="
+    height: auto;
+">
+      <source src="/assets/files/intro.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
     <button class="play-icon"><img src="/assets/images/play.svg"
         alt=""></button>
   </section>
@@ -141,10 +146,15 @@
       </div>
 
       <div class="letter-video-container">
-        <video id="letterVideo" controls class="video-modal">
+        <!-- <video id="letterVideo" controls class="video-modal">
           <source src="/assets/files/letter-video.mp4" type="video/mp4">
           Your browser does not support the video tag.
-        </video>
+        </video> -->
+
+
+        <iframe id="letterVideo" src="" frameborder="0"
+          allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+          class="video-modal iframe-fullscreen"></iframe>
       </div>
 
       <!-- <button id="letterNextButton" class="next-section-button"><img

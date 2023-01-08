@@ -1,5 +1,3 @@
-
-
 var main = {
   logoDrawContainer: '',
   textTypingEffectInitDelay: 8000,
@@ -31,6 +29,20 @@ var main = {
     // // setTimeout(() => {
     // //   main.openLetterInit();
     // // }, 3000)
+  },
+
+  introVideoInit() {
+
+    let video = document.getElementById('introVideo');
+
+    let duration = video.duration * 1000;
+    setTimeout(() => {
+      video.play();
+      setTimeout(() => {
+        main.logoDrawInit();
+      }, duration)
+    }, 2000);
+
   },
 
   pauseAudio(audio) {
@@ -106,14 +118,25 @@ var main = {
     main.ncsAudio.volume = 0.5;
   },
 
+
+
   introButtonInit() {
-    var container = document.querySelector('.intro-section');
     var button = document.querySelector('.intro-section button');
-    button.onclick = () => { container.style.display = 'none'; document.querySelector('.main').classList.add('start'); main.logoDrawInit(); }
+    button.onclick = () => {
+      document.querySelector('.play-icon').style.display = 'none';
+      main.introVideoInit();
+    }
 
   },
 
+
+
   logoDrawInit() {
+
+    var container = document.querySelector('.intro-section');
+
+
+    container.style.display = 'none'; document.querySelector('.main').classList.add('start');
 
     var container = document.querySelector('#aclAndMftContainer');
     container.classList.add('aclandmft-container');
@@ -202,7 +225,7 @@ var main = {
     let container = document.querySelector('.awards-video-container');
     let video = document.getElementById('awardsVideo');
     video.src = 'https://player.vimeo.com/video/786847058?h=619dae710a&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&autoplay=1&mute=0'
-    let duration = (4 * 60 + 51) * 1000 + 5000;
+    let duration = (4 * 60 + 51) * 1000 + 3000;
     // let duration = video.duration;
     setTimeout(() => {
       stopBackgroundFirework();
@@ -240,7 +263,10 @@ var main = {
     let cursor = container.querySelector('.cursor-container');
     let letterVideoContainer = container.querySelector('.letter-video-container');
     let letterVideo = letterVideoContainer.querySelector('#letterVideo');
-    let duration = letterVideo.duration * 1000 + 2000;
+
+    // let duration = letterVideo.duration * 1000 + 2000;
+
+    let duration = (1 * 60 + 3) * 1000 + 3000;
 
     setTimeout(() => {
       main.hiddenLogo();
@@ -252,7 +278,8 @@ var main = {
         main.pauseAudio(main.ncsAudio);
 
         letterVideoContainer.classList.add('is-active');
-        letterVideo.play();
+        // letterVideo.play();
+        letterVideo.src = 'https://player.vimeo.com/video/787242953?h=363542af9f&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&autoplay=1&mute=0'
 
         setTimeout(() => {
           letterVideoContainer.classList.remove('is-active');
@@ -261,7 +288,7 @@ var main = {
         }, duration)
       }, 4000)
 
-    }, 1000);
+    }, 2000);
 
   },
   secondTypingTextInit() {
