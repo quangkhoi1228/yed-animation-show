@@ -4,7 +4,7 @@ var main = {
   awardsVideoDelay: 15000,
   openLetterDelay: 15000,
   secondTextTypingEffectInitDelay: 8000,
-  happyNewYearDelay: 18000,
+  happyNewYearDelay: 16000,
   isTypingTextFadeout: false,
   aclAndMftAudio: '',
   typingAudio: '',
